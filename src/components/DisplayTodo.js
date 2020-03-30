@@ -6,6 +6,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 const DisplayTodo = (props) =>{
 
     const [checked,setCheckedProperty]=useState(false)
+
     const markComplete = () => {
         return (checked ? {textDecoration:'line-through'}: {textDecoration:'none'} )
      }
@@ -27,6 +28,7 @@ const DisplayTodo = (props) =>{
         <Container>
     <ListItem  style={markComplete()}>
         <ListItemText primary= {props.todo.text} />
+        
         <Checkbox checked={checked} onChange={toggleComplete} value={checked}/>
         <IconButton aria-label="delete" onClick={deleteTodoEvent}>
             <DeleteIcon />

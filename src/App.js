@@ -9,10 +9,9 @@ import DeletedTodos from './components/DeletedTodos'
 
 const App = () => {
     const [todos,setTodos] = useState ([])
-    const [todoItem,setTodoItem] = useState('')    
-    const [count,setCount]=useState(0)                                
+    const [todoItem,setTodoItem] = useState('')                                   
     const [deletedTodos,setDeletedTodos]=useState([])
-    const [deletedCount,setDeletedCount] = useState(0)
+
     
 
     const setTodoEvent = (event) => {
@@ -23,26 +22,20 @@ const App = () => {
     }
 
     const addTodoEvent = () => {
-        setTodos([...todos,{ id:uuid(), text:todoItem}])
-        setTodoItem('')
+        if(todoItem.trim().length > 0){
+            setTodos([...todos,{ id:uuid(), text:todoItem}])
+            setTodoItem('')
+        }
+        
     }
-
-    useEffect(() => {
-        setDeletedCount(deletedTodos.length)
-    }, [deletedTodos])
-
-    useEffect(() => {
-        setCount(todos.length)
-    }, [todos])
 
     return(
     <Container maxWidth="sm">
        <h1>To-do List</h1>
-      <Counters count={count} deletedCount={deletedCount} />
+      <Counters todos={todos} deletedTodos={deletedTodos} />
       <DisplayTodos todos={todos} deletedTodos={deletedTodos} setDeletedTodos={setDeletedTodos} setTodos={setTodos}/>
       <TextContainer todoItem={todoItem} setTodoEvent={setTodoEvent} addTodoEvent={addTodoEvent}/>
       <DeletedTodos todos={deletedTodos}/>
-      {/* <DisplayTodos todos={deletedTodos} /> */}
     </Container>
     )
 }
